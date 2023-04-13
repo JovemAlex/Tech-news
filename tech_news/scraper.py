@@ -1,6 +1,20 @@
+import requests
+import time
+
+
 # Requisito 1
 def fetch(url):
-    """Seu código deve vir aqui commit inicial"""
+    try:
+        time.sleep(1)
+        request = requests.get(
+            url, timeout=3, headers={"user-agent": "Fake user-agent"}
+        )
+        if request.status_code == 200:
+            return request.text
+        if not request.status_code == 200:
+            return None
+    except requests.ReadTimeout:
+        return None
 
 
 # Requisito 2
