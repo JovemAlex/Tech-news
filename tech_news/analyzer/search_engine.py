@@ -28,8 +28,12 @@ def search_by_date(date):
         raise ValueError("Data inválida")
 
 
-
-
 # Requisito 9
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    news_filtered = search_news(
+        {"category": {"$regex": category, "$options": "i"}}
+    )
+    if news_filtered:
+        return [(news["title"], news["url"]) for news in news_filtered]
+    else:
+        return []
